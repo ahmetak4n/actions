@@ -1,0 +1,40 @@
+name: SonarCloud
+
+on:
+  workflow_call:
+    inputs:
+      project-key:
+        required: true
+        type: string
+      organization:
+        required: true
+        type: string
+      sources:
+        required: false
+        type: string
+      exclusions:
+        required: false
+        type: string
+    secrets:
+      sonar-cloud-token:
+        required: true
+        
+permissions:
+  contents: read
+
+jobs:
+  semgrep:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+      - uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+          SONAR_TOKEN: ${{ secrets.sonar-cloud-token }}  
+        with:
+          args:
+            -Dsonar.projectKey=${{ github.event.inputs.project-key }}
+            -Dsonar.organization=${{ github.event.inputs.organization }}
+            -Dsonar.sources=${{ github.event.inputs.sources }}
+            -Dsonar.exclusions=${{ github.event.inputs.exclusions }}
