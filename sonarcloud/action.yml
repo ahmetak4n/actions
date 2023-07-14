@@ -13,9 +13,9 @@ inputs:
   exclusions:
     required: false
     type: string
-  secrets:
-    sonar-cloud-token:
-    required: true
+secrets:
+  sonar-cloud-token:
+  required: true
 
 runs:
   steps:
