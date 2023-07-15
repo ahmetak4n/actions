@@ -1,24 +1,30 @@
 name: SonarCloud
 
-inputs:
-  project-key:
-    required: true
-    type: string
-  organization:
-    required: true
-    type: string
-  sources:
-    required: false
-    type: string
-  exclusions:
-    required: false
-    type: string
-secrets:
-  sonar-cloud-token:
-  required: true
+on:
+  workflow_call:
+    inputs:
+      project-key:
+        required: true
+        type: string
+      organization:
+        required: true
+        type: string
+      sources:
+        required: false
+        type: string
+      exclusions:
+        required: false
+        type: string
+    secrets:
+      sonar-cloud-token:
+        required: true
+      github-token:
+        required: true
 
-runs:
-  steps:
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
     - uses: SonarSource/sonarcloud-github-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
