@@ -31,7 +31,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.sonar-cloud-token }}  
       with:
         args:
-          -Dsonar.projectKey=${{ github.event.inputs.project-key }}
-          -Dsonar.organization=${{ github.event.inputs.organization }}
-          -Dsonar.sources=${{ github.event.inputs.sources }}
-          -Dsonar.exclusions=${{ github.event.inputs.exclusions }}
+          -Dsonar.projectKey=${{ inputs.project-key }}
+          -Dsonar.organization=${{ inputs.organization }}
+          -Dsonar.sources=${{ inputs.sources }}
+          -Dsonar.exclusions=${{ inputs.exclusions }}
